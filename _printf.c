@@ -1,6 +1,6 @@
 #include <stdarg.h>   /* va_list, va_start, va_arg */
 #include <unistd.h>   /* write */
-	
+#include <string.h>	
 
 /**
  * _printf - produces output according to a format.
@@ -22,7 +22,7 @@ int _printf(const char *format, ...)
 			switch (*format)
 			{
 				case 'c':
-					count += write(1, &va_arg(args, int), 1);
+					count += write(1, va_arg(args, int), 1);
 					break;
 				case 's':
 					count += write(1, va_arg(args, char *), strlen(va_arg(args, char *)));
