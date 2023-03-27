@@ -1,14 +1,22 @@
+<<<<<<< HEAD
 #include "main.h"
 
 void print_buffer(char buffer[], int *buff_ind);
+=======
+#include <stdarg.h>   /* va_list, va_start, va_arg */
+#include <unistd.h>   /* write */
+#include <string.h>	
+>>>>>>> df6bf12ac8eb9f61c732dfa62e6a0080c5cee23b
 
 /**
  * _printf - Printf function
  * @format: format.
  * Return: Printed chars.
  */
+
 int _printf(const char *format, ...)
 {
+<<<<<<< HEAD
 	int i, printed = 0, printed_chars = 0;
 	int flags, width, precision, size, buff_ind = 0;
 	va_list list;
@@ -63,4 +71,41 @@ void print_buffer(char buffer[], int *buff_ind)
 		write(1, &buffer[0], *buff_ind);
 
 	*buff_ind = 0;
+=======
+	int count = 0;
+	va_list args;
+	va_start(args, format);
+
+	while (*format)
+	{
+		if (*format == '%')
+		{
+			format++; /* skip % */
+			switch (*format)
+			{
+				case 'c':
+					count += write(1, va_arg(args, int), 1);
+					break;
+				case 's':
+					count += write(1, va_arg(args, char *), strlen(va_arg(args, char *)));
+					break;
+				case '%':
+					count += write(1, "%", 1);
+					break;
+				default:
+					count += write(1, "%", 1);
+					count += write(1, &(*format), 1);
+					break;
+			}
+		}
+		else
+		{
+			count += write(1, &(*format), 1);
+		}
+		format++;
+	}
+
+	va_end(args);
+	return count;
+>>>>>>> df6bf12ac8eb9f61c732dfa62e6a0080c5cee23b
 }
