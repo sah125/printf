@@ -22,7 +22,7 @@
 	            switch (*format)
 	            {
 	                case 'c':
-	                    count += write(1, va_arg(args, int), 1);
+	                    count += write(1, va_arg(args, int, 1);
 	                    break;
 	                case 's':
 	                    count += write(1, va_arg(args, char *), strlen(va_arg(args, char *)));
